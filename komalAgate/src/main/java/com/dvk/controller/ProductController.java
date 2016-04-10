@@ -2,6 +2,7 @@ package com.dvk.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,8 @@ import com.dvk.service.ProductServiceImpl;
 @Controller
 public class ProductController {
 	
-	private ProductService productService = new ProductServiceImpl();
+	@Autowired
+	private ProductService productService;
 	
 	@RequestMapping(value="/products")
 	public String getProductList(Model model){
