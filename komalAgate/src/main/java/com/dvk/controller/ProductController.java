@@ -5,6 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.dvk.model.Product;
@@ -24,9 +27,10 @@ public class ProductController {
 		return "productList";
 	}
 	
-	@RequestMapping(value="/products/viewProduct")
-	public String viewProduct(Model model){
-		
+	@RequestMapping(value="/products/viewProduct/{productId}")
+	public String viewProduct(@PathVariable String productId,Model model){
+		Product product = productService.getProductById(productId);
+		model.addAttribute("product", product);
 		return "viewProduct";
 	}
 

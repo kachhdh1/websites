@@ -39,6 +39,7 @@
 							<li class="active"><a href="<c:url value="/"/>">Home</a></li>
 							<li><a href="<c:url value="products"/>">Products</a></li>
 							<li><a href="#contact">Contact</a></li>
+							<li><a href="<c:url value="admin"/>">Admin</a></li>
 						</ul>
 					</div>
 				</div>

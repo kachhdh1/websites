@@ -19,13 +19,15 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	public void addProduct(Product product) {
-		// TODO Auto-generated method stub
-
+		productDao.addProduct(product);
 	}
 
 	public void deleteProduct(String productId) {
-		// TODO Auto-generated method stub
+		productDao.deleteProduct(productId);
+	}
 
+	public Product getProductById(String productId) {
+		return productDao.getProductById(productId);
 	}
 
 }

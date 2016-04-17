@@ -13,8 +13,8 @@
 				<img alt="image" src="#" style="width: 100%; height: 300px;">
 			</div>
 			<div class="col-md-6">
-				<h2>Product Name</h2>
-				<p>Product desc </p>
+				<h2>${product.productName }</h2>
+				<p>${product.productCategory } </p>
 			</div>
 		</div>
 	</div>

@@ -17,8 +17,6 @@ public class Product {
 	private String productPrice;
 	private String productCategory;
 	private String productCondition;
-	private String price;
-	private String manufacturer;
 	//private String imagePath;
 	
 	public String getId() {
@@ -51,18 +49,7 @@ public class Product {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public String getPrice() {
-		return price;
-	}
-	public void setPrice(String price) {
-		this.price = price;
-	}
-	public String getManufacturer() {
-		return manufacturer;
-	}
-	public void setManufacturer(String manufacturer) {
-		this.manufacturer = manufacturer;
-	}
+	
 	/*public String getImagePath() {
 		return imagePath;
 	}
