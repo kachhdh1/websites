@@ -30,8 +30,12 @@
 						<a href='<spring:url value="/products/viewProduct/${product.id}" />' >
 							<span class="glyphicon glyphicon-info-sign" ></span>
 						</a>
-					 	
+					 	<!-- Shweta starts-->
+					 	<a href='<spring:url value="/admin/deleteProduct/${product.id}" />'>
 					 	<span class="glyphicon glyphicon-remove"></span>
+					 	</a>
+					 	<!-- Shweta ends *below span class is yours* -->
+					 	<!-- <span class="glyphicon glyphicon-remove"></span> -->
 					 	<span class="glyphicon glyphicon-pencil"></span>
 					</td>
 				</tr>

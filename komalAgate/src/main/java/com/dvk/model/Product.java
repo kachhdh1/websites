@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Transient;
+
+import org.springframework.web.multipart.MultipartFile;
 
 
 
@@ -17,7 +20,11 @@ public class Product {
 	private String productPrice;
 	private String productCategory;
 	private String productCondition;
-	//private String imagePath;
+	
+	//the image will not be persisted in database,
+	//it will  be stored in resources folder.
+	@Transient
+	private MultipartFile productImage;
 	
 	public String getId() {
 		return id;
@@ -48,6 +55,12 @@ public class Product {
 	}
 	public void setProductName(String productName) {
 		this.productName = productName;
+	}
+	public MultipartFile getProductImage() {
+		return productImage;
+	}
+	public void setProductImage(MultipartFile productImage) {
+		this.productImage = productImage;
 	}
 	
 	/*public String getImagePath() {
