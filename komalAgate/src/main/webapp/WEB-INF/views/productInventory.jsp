@@ -22,7 +22,7 @@
 			<c:forEach items="${products}" var="product">
 				<tr>
 
-					<td><img alt="image" src="#"></td>
+					<td><img src='<c:url value="/images/${product.id }.png"/>' style="width:100%; height: 100px;" /></td>
 					<td>${product.productName }</td>
 					<td>${product.productPrice }</td>
 					<td>${product.productCategory }</td>

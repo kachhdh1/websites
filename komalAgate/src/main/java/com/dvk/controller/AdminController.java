@@ -55,16 +55,18 @@ public class AdminController {
 	public String addProductPost(@ModelAttribute("product") Product product,
 			HttpServletRequest request) {
 		productService.addProduct(product);
-		// save image in web-inf/resources folder
+		
 		MultipartFile image = product.getProductImage();
-		String rootDirectory = request.getSession().getServletContext()
-				.getRealPath("/");
-		path = Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\"
-				+ product.getId() + ".png");
+		//String rootDirectory = request.getSession().getServletContext()
+				//.getRealPath("/");
+		//path = Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\"
+				//+ product.getId() + ".png");
+		
+		String imageUrl = "D:/Dharmik/"+ product.getId() + ".png";
 
 		if (null != image && !image.isEmpty()) {
 			try {
-				image.transferTo(new File(path.toString()));
+				image.transferTo(new File(imageUrl));
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new RuntimeException("Error in saving image", e);

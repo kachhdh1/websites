@@ -10,7 +10,7 @@
 
 		<div class="row">
 			<div class="col-md-6">
-				<img alt="image" src="#" style="width: 100%; height: 300px;">
+				<img src='<c:url value="/images/${product.id }.png"/>' style="width: 100%; height: 300px;">
 			</div>
 			<div class="col-md-6">
 				<h2>${product.productName }</h2>
