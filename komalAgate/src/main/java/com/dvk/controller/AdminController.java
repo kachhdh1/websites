@@ -62,7 +62,7 @@ public class AdminController {
 		//path = Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\"
 				//+ product.getId() + ".png");
 		
-		String imageUrl = "D:/Dharmik/"+ product.getId() + ".png";
+		String imageUrl = "H:/Codes_dk/"+ product.getId() + ".png";
 
 		if (null != image && !image.isEmpty()) {
 			try {
@@ -84,7 +84,36 @@ public class AdminController {
 		/*List<Product> productList = productService.getProducts();
 		model.addAttribute("products", productList);
 		return "productList";*/
+		String imageUrl = "H:/Codes_dk/"+ productId + ".png";
+		File file = new File(imageUrl);
+		file.delete();
 		 return "redirect:/admin/product"; 
+	}
+	
+	@RequestMapping(value="/updateProduct/{productId}")
+	public String updateProduct(@PathVariable String productId,Model model){
+		Product product = productService.getProductById(productId);
+		model.addAttribute("product", product);
+		return "updateProduct";
+	}
+	
+	@RequestMapping(value = "/productInventory/updateProduct", method = RequestMethod.POST)
+	public String updateProductPost(@ModelAttribute("product") Product product,
+			HttpServletRequest request) {
+		productService.addProduct(product);
+		MultipartFile image = product.getProductImage();
+		
+		String imageUrl = "H:/Codes_dk/"+ product.getId() + ".png";
+
+		if (null != image && !image.isEmpty()) {
+			try {
+				image.transferTo(new File(imageUrl));
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new RuntimeException("Error in saving image", e);
+			}
+		}
+		return "redirect:/admin/product";
 	}
 	/* Shweta's code ends */
 }
