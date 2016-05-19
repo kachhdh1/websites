@@ -36,7 +36,10 @@
 					 	</a>
 					 	<!-- Shweta ends *below span class is yours* -->
 					 	<!-- <span class="glyphicon glyphicon-remove"></span> -->
+					 	<!--  shweta adding code for update starts -->
+					 	<a href='<spring:url value="/admin/updateProduct/${product.id}" />'>
 					 	<span class="glyphicon glyphicon-pencil"></span>
+					 	</a>
 					</td>
 				</tr>
 			</c:forEach>

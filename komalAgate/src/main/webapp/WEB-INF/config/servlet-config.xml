@@ -14,7 +14,7 @@
 	
 	<!-- added to make resources folder available in classpath -->
 	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
-	<mvc:resources location="file:/D:/Dharmik/" mapping="/images/**"/>
+	<mvc:resources location="file:/H:/Codes_dk/" mapping="/images/**"/>
 	
 	<!-- basic view resolver -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

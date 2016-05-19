@@ -1,4 +1,4 @@
-
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@include file="/WEB-INF/views/templates/header.jsp"%>
 
 <div class="container-wrapper">
@@ -21,11 +21,15 @@
 			<c:forEach items="${products}" var="product">
 				<tr>
 
-					<td><img alt="image" src="#"></td>
+					<td><img src='<c:url value="/images/${product.id }.png"/>' style="width:100%; height: 100px;" /></td>
 					<td>${product.productName }</td>
 					<td>${product.productPrice }</td>
 					<td>${product.productCategory }</td>
-					<td><span class="glyphicon glyphicon-info-sign"></span></td>
+					<td>
+					<a href='<spring:url value="/products/viewProduct/${product.id}" />' >
+							<span class="glyphicon glyphicon-info-sign" ></span>
+						</a>
+					<!-- <span class="glyphicon glyphicon-info-sign"></span></td> -->
 				</tr>
 			</c:forEach>
 		</table>
