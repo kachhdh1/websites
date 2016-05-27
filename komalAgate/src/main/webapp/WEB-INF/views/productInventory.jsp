@@ -22,7 +22,7 @@
 			<c:forEach items="${products}" var="product">
 				<tr>
 
-					<td><img alt="image" src="#"></td>
+					<td><img src='<c:url value="/images/${product.id }.png"/>' style="width:100%; height: 100px;" /></td>
 					<td>${product.productName }</td>
 					<td>${product.productPrice }</td>
 					<td>${product.productCategory }</td>
@@ -30,9 +30,16 @@
 						<a href='<spring:url value="/products/viewProduct/${product.id}" />' >
 							<span class="glyphicon glyphicon-info-sign" ></span>
 						</a>
-					 	
+					 	<!-- Shweta starts-->
+					 	<a href='<spring:url value="/admin/deleteProduct/${product.id}" />'>
 					 	<span class="glyphicon glyphicon-remove"></span>
+					 	</a>
+					 	<!-- Shweta ends *below span class is yours* -->
+					 	<!-- <span class="glyphicon glyphicon-remove"></span> -->
+					 	<!--  shweta adding code for update starts -->
+					 	<a href='<spring:url value="/admin/updateProduct/${product.id}" />'>
 					 	<span class="glyphicon glyphicon-pencil"></span>
+					 	</a>
 					</td>
 				</tr>
 			</c:forEach>

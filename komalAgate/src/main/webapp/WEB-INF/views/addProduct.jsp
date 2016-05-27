@@ -11,7 +11,7 @@
 
 		<form:form
 			action="${pageContext.request.contextPath}/admin/productInventory/addProduct"
-			method="post" commandName="product">
+			method="post" commandName="product" enctype="multipart/form-data">
 			<div class="form-group">
 				<label for="productName">Product Name</label> 
 				<form:input path="productName" class="form-control" id="productName" />
@@ -27,6 +27,10 @@
 			<div class="form-group">
 				<label for="productCondition">Product Condition</label> 
 				<form:input path="productCondition" class="form-control" id="productCondition" />
+			</div>
+			<div class="form-group">
+				<label class="control-label" for="productImage">Upload Picture</label> 
+				<form:input type="file" path="productImage" class="form:input-large" id="productImage" />
 			</div>
 			<button type="submit" class="btn btn-default">Submit</button>
 		</form:form>
