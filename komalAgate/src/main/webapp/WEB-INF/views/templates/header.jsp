@@ -10,7 +10,11 @@
 <meta name="author" content="">
 <link rel="icon" href="../../favicon.ico">
 
-<title>Product List</title>
+<title>Komal Agate</title>
+<!-- Angular JS -->
+<script
+	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js">
+</script>
 
 <!-- Bootstrap core CSS -->
 <link href="<c:url value="/resources/css/bootstrap.min.css"/>"
@@ -18,6 +22,10 @@
 
 <!-- Main CSS -->
 <link href="<c:url value="/resources/css/main.css" />" rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href='<c:url value="/resources/css/carousel.css"/>'
+	rel="stylesheet">
 </head>
 <!-- NAVBAR
 ================================================== -->
@@ -35,13 +43,16 @@
 								class="icon-bar"></span> <span class="icon-bar"></span> <span
 								class="icon-bar"></span>
 						</button>
-						<a class="navbar-brand" href="#">Project name</a>
+						<a class="navbar-brand" href="#">Komal Agate</a>
 					</div>
 					<div id="navbar" class="navbar-collapse collapse">
 						<ul class="nav navbar-nav">
 							<li class="active"><a href="<c:url value="/"/>">Home</a></li>
 							<li><a href="<c:url value="/products"/>">Products</a></li>
 							<li><a href="#contact">Contact</a></li>
+
+						</ul>
+						<ul class="nav navbar-nav pull-right">
 							<li><a href="<c:url value="/admin"/>">Admin</a></li>
 						</ul>
 					</div>
