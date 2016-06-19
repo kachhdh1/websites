@@ -22,11 +22,11 @@ public class ProductServiceImpl implements ProductService {
 		productDao.addProduct(product);
 	}
 
-	public void deleteProduct(String productId) {
+	public void deleteProduct(int productId) {
 		productDao.deleteProduct(productId);
 	}
 
-	public Product getProductById(String productId) {
+	public Product getProductById(int productId) {
 		return productDao.getProductById(productId);
 	}
 
