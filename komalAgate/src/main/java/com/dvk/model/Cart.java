@@ -1,80 +1,66 @@
 package com.dvk.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
+import java.util.List;
 
-public class Cart {
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
-	private String cartId;
+@Entity
+public class Cart implements Serializable{
 
-	Map<String, CartItem> cartItems = new HashMap<String, CartItem>();
 
-	private int total;
+	private static final long serialVersionUID = 6870529141881594563L;
 
-	public String getCartId() {
+	@Id
+	@GeneratedValue
+	private int cartId;
+
+	@OneToMany(mappedBy="cart",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	private List<CartItem> cartItems;
+	
+	@OneToOne
+	@JoinColumn(name="customerId")
+	private Customer customer;
+	
+	private double grandTotal;
+
+	public int getCartId() {
 		return cartId;
 	}
 
-	public void setCartId(String cartId) {
+	public void setCartId(int cartId) {
 		this.cartId = cartId;
 	}
 
-	public Map<String, CartItem> getCartItems() {
+	public List<CartItem> getCartItems() {
 		return cartItems;
 	}
 
-	public void setCartItems(Map<String, CartItem> cartItems) {
+	public void setCartItems(List<CartItem> cartItems) {
 		this.cartItems = cartItems;
 	}
 
-	public int getTotal() {
-		return total;
+	public Customer getCustomer() {
+		return customer;
 	}
 
-	public Cart(String cartId, Map<String, CartItem> cartItems, int total) {
-		super();
-		this.cartId = cartId;
-		this.cartItems = cartItems;
-		this.total = total;
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
-	public Cart() {
+	public double getGrandTotal() {
+		return grandTotal;
 	}
 
-	public void setTotal(int total) {
-		this.total = total;
-	}
-
-	public void addCartItem(CartItem item) {
-		String productId = item.getProduct().getId();
-
-		if (cartItems.containsKey(productId)) {
-			// product exists in the list, so it must be updated
-			CartItem existingItem = cartItems.get(productId);
-			existingItem.setQuantity(existingItem.getQuantity()
-					+ item.getQuantity());
-			cartItems.put(productId, existingItem);
-		} else {
-			cartItems.put(productId, item);
-		}
-		
-		updateCartAmout();
-	}
-	
-	public void removeItem(CartItem item){
-		String productId = item.getProduct().getId();
-
-		if (cartItems.containsKey(productId)) {
-			cartItems.remove(productId);
-		}
-		updateCartAmout();
-	}
-
-	private void updateCartAmout() {
-		total = 0;
-		for(CartItem item : cartItems.values()){
-			total+=item.getItemAmount();
-		}
+	public void setGrandTotal(double grandTotal) {
+		this.grandTotal = grandTotal;
 	}
 
 }
