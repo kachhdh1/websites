@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dvk</groupId>
-  <artifactId>Cart</artifactId>
+  <artifactId>komalAgate</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>Cart Maven Webapp</name>
@@ -124,6 +124,12 @@
             <version>${spring.security.version}</version>
         </dependency>
         
+        <dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>${spring.security.version}</version>
+		</dependency>
+        
         <!-- for trasfering model to json and vice versa -->
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -149,6 +155,6 @@
 		
 	</dependencies>
   <build>
-    <finalName>Cart</finalName>
+    <finalName>komalAgate</finalName>
   </build>
 </project>

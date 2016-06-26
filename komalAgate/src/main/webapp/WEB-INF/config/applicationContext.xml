@@ -60,9 +60,14 @@
         <security:logout
             logout-success-url="/login?logout" />
     </security:http>
+    
+    <!-- for password encoding  -->
+    <bean id="bcryptEncoder" 
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
     <security:authentication-manager>
         <security:authentication-provider>
+        	<security:password-encoder ref="bcryptEncoder"/><!-- adding reference to endcoder -->
             <security:jdbc-user-service data-source-ref="dataSource"
                                         authorities-by-username-query="SELECT username, authority From authorities WHERE username = ?"
                                         users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?" />
