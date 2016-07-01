@@ -8,7 +8,7 @@
 			<p class="lead">Selected product details listed below !</p>
 		</div>
 
-		<div class="row">
+		<div class="row" ng-app="cartApp">
 			<div class="col-md-6">
 				<img src='<c:url value="/images/${product.id }.png"/>'
 					style="width: 100%; height: 300px;">
@@ -16,10 +16,15 @@
 			<div class="col-md-6">
 				<h2>${product.productName }</h2>
 				<p>${product.productCategory }</p>
+				<h4>${product.productPrice} INR</h4>
 			</div>
 			<br>
-			<p>
-				<a href="<spring:url value="/cart" />" class="btn btn-default"><span
+			
+			<p ng-controller="cartCtrl">
+				<a href="#" class="btn btn-warning btn-large" ng-click="addToCart('${product.id }')">
+					<span class="glyphicon glyphicon-shopping-cart">Order Now</span>
+				</a>
+				<a href="<spring:url value="/customer/cart" />" class="btn btn-default"><span
 					class="glyphicon glyphicon-hand-right"></span>View Cart</a>
 			</p>
 		</div>
