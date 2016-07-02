@@ -1,14 +1,15 @@
 package com.dvk.controller;
 
 import java.io.File;
-import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,7 +23,16 @@ import com.dvk.service.ProductService;
 
 @Controller
 @RequestMapping(value = "/admin")
+//@PropertySource("classpath:global.properties")
 public class AdminController {
+	
+	/*@Autowired
+	private Environment env;
+	
+	String image_path = env.getProperty("image_path");*/
+	
+	@Value("${image_path}")
+	String image_path;
 
 	private Path path;
 
@@ -61,8 +71,23 @@ public class AdminController {
 				//.getRealPath("/");
 		//path = Paths.get(rootDirectory + "\\WEB-INF\\resources\\images\\"
 				//+ product.getId() + ".png");
+		File imageDir = new File(image_path);
+		if(!imageDir.exists()){
+			System.out.println("creating folder: " + image_path);
+		    boolean result = false;
+		    try{
+		        imageDir.mkdir();
+		        result = true;
+		    } 
+		    catch(SecurityException se){
+		       System.out.println("No priviledge to create file");
+		    }        
+		    if(result) {    
+		        System.out.println("Folder created");  
+		    }
+		}
 		
-		String imageUrl = "H:/Codes_dk/"+ product.getId() + ".png";
+		String imageUrl = image_path+ product.getId() + ".png";
 
 		if (null != image && !image.isEmpty()) {
 			try {
@@ -79,19 +104,19 @@ public class AdminController {
 	/* below method added by Shweta */
 
 	@RequestMapping(value = "/deleteProduct/{productId}")
-	public String deleteProduct(@PathVariable String productId, Model model) {
+	public String deleteProduct(@PathVariable int productId, Model model) {
 		productService.deleteProduct(productId);
 		/*List<Product> productList = productService.getProducts();
 		model.addAttribute("products", productList);
 		return "productList";*/
-		String imageUrl = "H:/Codes_dk/"+ productId + ".png";
+		String imageUrl = image_path+ productId + ".png";
 		File file = new File(imageUrl);
 		file.delete();
 		 return "redirect:/admin/product"; 
 	}
 	
 	@RequestMapping(value="/updateProduct/{productId}")
-	public String updateProduct(@PathVariable String productId,Model model){
+	public String updateProduct(@PathVariable int productId,Model model){
 		Product product = productService.getProductById(productId);
 		model.addAttribute("product", product);
 		return "updateProduct";
@@ -103,7 +128,7 @@ public class AdminController {
 		productService.addProduct(product);
 		MultipartFile image = product.getProductImage();
 		
-		String imageUrl = "H:/Codes_dk/"+ product.getId() + ".png";
+		String imageUrl = image_path+ product.getId() + ".png";
 
 		if (null != image && !image.isEmpty()) {
 			try {

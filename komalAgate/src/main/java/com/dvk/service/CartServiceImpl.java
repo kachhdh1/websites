@@ -16,10 +16,10 @@ public class CartServiceImpl implements CartService {
 		Product product = new Product();
 		product.setProductName("Product One");
 		product.setProductPrice("10 rupees");
-		CartItem item = new CartItem(product, 2);
+		//CartItem item = new CartItem(product, 2);
 		Map<String, CartItem> cartItems = new HashMap<String, CartItem>();
-		cartItems.put("Product1",item);
-		return new Cart(cartId,cartItems,800);
+		//cartItems.put("Product1",item);
+		return new Cart();
 	}
 
 }

@@ -2,7 +2,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.dvk</groupId>
-  <artifactId>Cart</artifactId>
+  <artifactId>komalAgate</artifactId>
   <packaging>war</packaging>
   <version>0.0.1-SNAPSHOT</version>
   <name>Cart Maven Webapp</name>
@@ -14,6 +14,7 @@
 		<spring.version>4.2.4.RELEASE</spring.version>
 		<hibernate-version>4.0.1.Final</hibernate-version>
 		<servlet.api.version>3.0.1</servlet.api.version>
+		<spring.security.version>3.2.5.RELEASE</spring.security.version>
 	</properties>
 
 	<dependencies>
@@ -87,6 +88,18 @@
 			<version>2.4</version>
 		</dependency>
 		<!-- file upload jars -->
+		
+		<dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.2.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.0.0.GA</version>
+        </dependency>
+		
 		<dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
@@ -96,20 +109,26 @@
 		<dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>3.1.4.RELEASE</version>
+            <version>${spring.security.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>3.1.4.RELEASE</version>
+            <version>${spring.security.version}</version>
         </dependency>
 
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>3.1.4.RELEASE</version>
+            <version>${spring.security.version}</version>
         </dependency>
+        
+        <dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>${spring.security.version}</version>
+		</dependency>
         
         <!-- for trasfering model to json and vice versa -->
         <dependency>
@@ -128,9 +147,14 @@
             <version>2.5.1</version>
         </dependency>
         
+        <dependency>
+            <groupId>org.springframework.webflow</groupId>
+            <artifactId>spring-webflow</artifactId>
+            <version>2.3.3.RELEASE</version>
+        </dependency>
 		
 	</dependencies>
   <build>
-    <finalName>Cart</finalName>
+    <finalName>komalAgate</finalName>
   </build>
 </project>

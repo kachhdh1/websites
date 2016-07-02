@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,6 +15,7 @@
 <!-- Angular JS -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js">
+	
 </script>
 
 <!-- Bootstrap core CSS -->
@@ -53,7 +55,20 @@
 
 						</ul>
 						<ul class="nav navbar-nav pull-right">
-							<li><a href="<c:url value="/admin"/>">Admin</a></li>
+							<c:if test="${pageContext.request.userPrincipal.name==null}">
+								<li><a href="<c:url value="/login"/>">Login</a></li>
+								<li><a href="<c:url value="/register"/>">Register</a></li>
+							</c:if>
+							<c:if test="${pageContext.request.userPrincipal.name != null}">
+								<li><a>Welcome:${pageContext.request.userPrincipal.name}</a></li>
+								<li><a href="<c:url value="/j_spring_security_logout" />">Logout</a></li>
+								<security:authorize ifAllGranted="ROLE_USER">
+									<li><a href="<c:url value="/customer/cart" />">Cart</a></li>
+								</security:authorize>
+								<security:authorize ifAllGranted="ROLE_ADMIN">
+									<li><a href="<c:url value="/admin" />">Admin</a></li>
+								</security:authorize>
+							</c:if>
 						</ul>
 					</div>
 				</div>

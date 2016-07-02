@@ -8,7 +8,7 @@ public interface ProductDao {
 
 	public List<Product> getProducts();
 	public void addProduct(Product product);
-	public void deleteProduct(String productId);
-	public Product getProductById(String id);
+	public void deleteProduct(int productId);
+	public Product getProductById(int productId);
 	
 }

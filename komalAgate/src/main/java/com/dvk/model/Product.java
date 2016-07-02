@@ -1,32 +1,52 @@
 package com.dvk.model;
 
+import java.io.Serializable;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
-public class Product {
+public class Product implements Serializable{
+	//class is implementing serializable as it will be user in webflow
+	private static final long serialVersionUID = 2730829470825071864L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private String id;
+	private int id;
 	private String productName;
 	private String productPrice;
 	private String productCategory;
 	private String productCondition;
 	
+	@OneToMany(mappedBy="product",cascade=CascadeType.ALL,fetch=FetchType.EAGER)
+	@JsonIgnore 
+	private List<CartItem> cartItems;
+	
+	public List<CartItem> getCartItems() {
+		return cartItems;
+	}
+	public void setCartItems(List<CartItem> cartItems) {
+		this.cartItems = cartItems;
+	}
 	//the image will not be persisted in database,
 	//it will  be stored in resources folder.
 	@Transient
 	private MultipartFile productImage;
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	public String getProductPrice() {
@@ -47,7 +67,7 @@ public class Product {
 	public void setProductCondition(String productCondition) {
 		this.productCondition = productCondition;
 	}
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getProductName() {

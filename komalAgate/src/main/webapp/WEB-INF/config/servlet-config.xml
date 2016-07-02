@@ -4,17 +4,17 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.2.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<mvc:annotation-driven />
 	<context:component-scan base-package="com.dvk" />
 	
 	<!-- added to make resources folder available in classpath -->
 	<mvc:resources mapping="/resources/**" location="/WEB-INF/resources/" />
-	<mvc:resources location="file:/H:/Codes_dk/" mapping="/images/**"/>
+	<mvc:resources location="file:${image_path}" mapping="/images/**"/>
 	
 	<!-- basic view resolver -->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">

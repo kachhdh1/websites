@@ -33,13 +33,13 @@ public class ProductDaoImpl implements ProductDao{
 		session.flush();
 	}
 
-	public void deleteProduct(String productId) {
+	public void deleteProduct(int productId) {
 		Session session = sessionFactory.getCurrentSession();
 		session.delete(getProductById(productId));
 		session.flush();
 	}
 
-	public Product getProductById(String id) {
+	public Product getProductById(int id) {
 		Session session = sessionFactory.getCurrentSession();
 		Product product = (Product) session.get(Product.class, id);
 		return product;

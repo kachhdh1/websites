@@ -1,12 +1,48 @@
 package com.dvk.model;
 
-public class CartItem {
+import java.io.Serializable;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+@Entity
+public class CartItem implements Serializable{
 	
+	private static final long serialVersionUID = 2929958392639133101L;
+
+	@Id
+	@GeneratedValue
+	private int cartItemId;
+	
+	@ManyToOne
+	@JoinColumn(name="cartId")
+	@JsonIgnore
+	private Cart cart;
+	
+	@ManyToOne
+	@JoinColumn(name="productId")
 	private Product product;
 	
-	private int quantity;
-	
-	private int itemAmount;
+	public int getCartItemId() {
+		return cartItemId;
+	}
+
+	public void setCartItemId(int cartItemId) {
+		this.cartItemId = cartItemId;
+	}
+
+	public Cart getCart() {
+		return cart;
+	}
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
+	}
 
 	public Product getProduct() {
 		return product;
@@ -24,20 +60,15 @@ public class CartItem {
 		this.quantity = quantity;
 	}
 
-	public CartItem(Product product, int quantity) {
-		super();
-		this.product = product;
-		this.quantity = quantity;
+	public double getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
 	}
 	
-	public CartItem() {}
-
-	public int getItemAmount() {
-		return itemAmount;
-	}
-
-	public void setItemAmount(int itemAmount) {
-		this.itemAmount = itemAmount;
-	}
-
+	private int quantity;
+	
+	private double totalAmount;
 }
