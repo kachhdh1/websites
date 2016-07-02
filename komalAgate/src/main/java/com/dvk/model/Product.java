@@ -27,7 +27,7 @@ public class Product implements Serializable{
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int id;
 	private String productName;
-	private String productPrice;
+	private double productPrice;
 	private String productCategory;
 	private String productCondition;
 	
@@ -49,10 +49,10 @@ public class Product implements Serializable{
 	public int getId() {
 		return id;
 	}
-	public String getProductPrice() {
+	public double getProductPrice() {
 		return productPrice;
 	}
-	public void setProductPrice(String productPrice) {
+	public void setProductPrice(double productPrice) {
 		this.productPrice = productPrice;
 	}
 	public String getProductCategory() {
