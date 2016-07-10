@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,9 +15,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.dvk.model.Product;
 import com.dvk.service.ProductService;
+import com.dvk.views.ProductReportExcel;
+import com.dvk.views.ProductsReportPdf;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -141,4 +142,16 @@ public class AdminController {
 		return "redirect:/admin/product";
 	}
 	/* Shweta's code ends */
+	
+	@RequestMapping("/productsPdf")
+	public ModelAndView getAllProductsPdf(){
+		List<Product> allProducts =  productService.getProducts();
+		return new ModelAndView("productsRptPdf","allProducts",allProducts);
+	}
+	
+	@RequestMapping("/productsXls")
+	public ModelAndView getAllProductsExcel(){
+		List<Product> allProducts =  productService.getProducts();
+		return new ModelAndView("productsRptExcel","allProducts",allProducts);
+	}
 }

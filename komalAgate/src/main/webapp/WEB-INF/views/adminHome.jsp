@@ -12,14 +12,16 @@
 			<h2>
 				Welcome:
 				<c:out value="${pageContext.request.userPrincipal.name}" />
-				| <a href="<c:url value="/j_spring_security_logout" />">Logout</a>
 			</h2>
 		</c:if>
 
 		<h3>
 			<a href="<c:url value="/admin/product"/>">Product Inventory</a>
 		</h3>
-		<p>Here you can view, check and manage product inventory.</p>
+		<p>
+			<h3>Product Report (<a href="<c:url value="/admin/productsPdf"/>">Pdf</a> | 
+			<a href="<c:url value="#"/>">Excel)</a></h3>
+		</p>
 	</div>
 </div>
 <!-- /.container -->
