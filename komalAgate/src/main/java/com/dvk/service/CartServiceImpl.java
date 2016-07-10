@@ -41,7 +41,7 @@ public class CartServiceImpl implements CartService {
 		return cartDao.getCartItemByProductId(productId);
 	}
 	
-	private double getGrandTotalForCart(Cart cart){
+	public double getGrandTotalForCart(Cart cart){
 		double total = 0;
 		for(CartItem items : cart.getCartItems()){
 			total+=items.getTotalAmount();

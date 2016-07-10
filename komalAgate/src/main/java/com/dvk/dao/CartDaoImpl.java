@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.dvk.exceptions.CartInvalidException;
 import com.dvk.model.Cart;
 import com.dvk.model.CartItem;
+import com.dvk.service.CartServiceImpl;
 
 @Repository
 @Transactional
@@ -19,6 +21,9 @@ public class CartDaoImpl implements CartDao {
 	@Autowired
 	private SessionFactory sessionFactory;
 	
+	@Autowired
+	private CartServiceImpl cartServiceImpl;
+	
 	public Cart getCartById(int cartId) {
 		Session session = sessionFactory.getCurrentSession();
 		Cart cart = (Cart) session.get(Cart.class, cartId);
@@ -26,7 +31,11 @@ public class CartDaoImpl implements CartDao {
 	}
 
 	public void updateCart(Cart cart) {
-		//to do later
+		double grandTotal = cartServiceImpl.getGrandTotalForCart(cart);
+		cart.setGrandTotal(grandTotal);
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(cart);
+		session.flush();
 	}
 
 	public void addCartItem(CartItem item) {
@@ -56,5 +65,22 @@ public class CartDaoImpl implements CartDao {
 		session.flush();
 		return (CartItem) query.uniqueResult();
 	}
+	
+	/**
+	 * This function is called by spring-web-flow to valid 
+	 * if the cart is valid or not. And then updates the total amount
+	 * @param cartId
+	 * @return
+	 * @throws CartInvalidException
+	 */
+	public Cart validate(int cartId)  throws CartInvalidException{
+		
+        Cart cart=getCartById(cartId);
+        if(cart==null||cart.getCartItems().size()==0) {
+            throw new CartInvalidException();
+        }
+        updateCart(cart);
+        return cart;
+    }
 
 }
