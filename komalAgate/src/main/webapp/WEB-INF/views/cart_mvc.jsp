@@ -15,6 +15,9 @@
 					<a class="btn btn-danger" href='<spring:url value="/mvc/cart/clear/${cart.cartId}" />'>
 						<span class="glyphicon glyphicon-remove-sign">Clear Cart</span>
 					</a>
+					<a class="btn btn-success" href='<spring:url value="/customer/order/${cart.cartId}" />'>
+						<span class="glyphicon glyphicon-shopping-cart">Check Out</span>
+					</a>
 				</div>
 				<table class="table table-hover">
 					<tr>
