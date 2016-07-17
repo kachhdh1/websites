@@ -8,12 +8,15 @@
 			<p class="lead">The products added to your cart.</p>
 		</div>
 
-		<section  ng-app="cartApp">
-			<div ng-controller="cartCtrl" ng-init="initCartId('${cartId}')">
+		<section>
+			<div >
 			
 				<div>
-					<a class="btn btn-danger" ng-click="clearCart()">
+					<a class="btn btn-danger" href='<spring:url value="/mvc/cart/clear/${cart.cartId}" />'>
 						<span class="glyphicon glyphicon-remove-sign">Clear Cart</span>
+					</a>
+					<a class="btn btn-success" href='<spring:url value="/customer/order/${cart.cartId}" />'>
+						<span class="glyphicon glyphicon-shopping-cart">Check Out</span>
 					</a>
 				</div>
 				<table class="table table-hover">
@@ -24,22 +27,24 @@
 						<th>Price</th>
                     	<th>Action</th>
 					</tr>
-					<tr ng-repeat="item in cart.cartItems">
-						<td>{{item.product.productName}}</td>
-						<td>{{item.product.productPrice}}</td>
-						<td>{{item.quantity}}</td>
-						<td>{{item.totalAmount}}</td>
-						<td>
-							<a href="#" class="label label-danger" ng-click="removeFromCart(item.product.id)">
-								<span class="glyphicon glyphicon-remove">remove</span>
-							</a>
-						</td>
-					</tr>
+					<c:forEach items="${cart.cartItems}" var="item">
+						<tr>
+							<td>${item.product.productName}</td>
+							<td>${item.product.productPrice}</td>
+							<td>${item.quantity}</td>
+							<td>${item.totalAmount}</td>
+							<td>
+								<a href='<spring:url value="/mvc/cart/remove/${item.product.id}/${cart.cartId}" />' class="label label-danger">
+									<span class="glyphicon glyphicon-remove">remove</span>
+								</a>
+							</td>
+						</tr>
+					</c:forEach>
 					<tr>
 	                    <th></th>
 	                    <th></th>
 	                    <th>Grand Total</th>
-	                    <th>{{cartGrandTotal}}</th>
+	                    <th>${cart.grandTotal }</th>
 	                    <th></th>
                 	</tr>
 				</table>

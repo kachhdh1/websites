@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<flow xmlns="http://www.springframework.org/schema/webflow"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow
+        http://www.springframework.org/schema/webflow/spring-webflow-2.0.xsd">
+
+	<!-- the variable defined order will be in the scope
+	of entire work-flow. It can be used, updated and deleted, 
+	passed to various view states also -->
+	<var name="order" class="com.dvk.model.CustomerOder"/>
+	
+	<!-- evaluate expression will call a dao method with request
+	parameter passed from redirect url of controller -->
+	<action-state id="addCartToOrder">
+		<evaluate expression="cartDaoImpl.validate(requestParameters.cartId)" result="order.cart" />
+		<transition to="invalidCartWarning" on-exception="com.dvk.exceptions.CartInvalidException" />
+		<transition to="collectCustomerInfo"/>
+	</action-state>
+	
+	<view-state id="collectCustomerInfo" view="collectCustomerInfo.jsp" model="order" >
+		<transition on="customerInfoCollected" to="collectBillingDetails"></transition>
+	</view-state>
+	
+	<view-state id="collectBillingDetails" view="collectBillingDetails.jsp" model="order">
+		<transition on="billingDetailCollected" to="orderConfirmation" />
+        <transition on="backToCollectCustomerInfo" to="collectCustomerInfo" />
+	</view-state>
+	
+	<view-state id="orderConfirmation">
+        <transition on="orderConfirmed" to="processOrder" />
+        <transition on="backToCollectBillingDetail" to="collectBillingDetails" />
+    </view-state>
+
+    <action-state id="processOrder">
+        <evaluate expression="cartDaoImpl.removeAllCartItems(order.cart)" />
+        <transition to="thankCustomer" />
+    </action-state>
+	
+	<view-state id="thankCustomer" model="order">
+        <transition to="endState" />
+    </view-state>
+
+    <end-state id="endState" />
+
+    <view-state id="invalidCartWarning">
+        <transition to="endState" />
+    </view-state>
+
+    <end-state id="cancelCheckout" view="checkOutCancelled.jsp" />
+
+    <global-transitions>
+        <transition on="cancel" to="cancelCheckout" />
+    </global-transitions>
+
+</flow>
