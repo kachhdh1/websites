@@ -67,14 +67,20 @@
     <bean id="bcryptEncoder" 
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
+	<!-- changing the auth provided to LDAP -->
     <security:authentication-manager>
-        <security:authentication-provider>
-        	<security:password-encoder ref="bcryptEncoder"/><!-- adding reference to endcoder -->
-            <security:jdbc-user-service data-source-ref="dataSource"
-                                        authorities-by-username-query="SELECT username, authority From authorities WHERE username = ?"
-                                        users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?" />
-        </security:authentication-provider>
+        <security:ldap-authentication-provider server-ref="ldapServer"
+											   user-search-filter="(uid={0})"
+											   user-search-base="ou=Users"
+											   group-search-base="ou=Groups" 
+											   role-prefix="ROLE_"/>
     </security:authentication-manager>
+    
+    <!-- setting up ldap server (if no url is given, spring will start default embedded server port:33389) 
+    if embedded, given the location of resources which is LDIF file-->
+    <security:ldap-server ldif="classpath:ldap-repository.ldif" id="ldapServer" 
+    					  root="dc=dharmikkachhia,dc=com"/>
+    
     <!-- spring security configuration ends-->
     
     <!-- spring web-flow configuration starts -->
