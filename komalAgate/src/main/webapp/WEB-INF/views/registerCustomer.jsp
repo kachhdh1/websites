@@ -14,14 +14,15 @@
 	                   commandName="customer">
 	
 	        <h3>Basic Info</h3>
-	
+	        
+			<span style="color: #ff0000">${registerErrorMsg}</span>
 	        <div class="form-group">
-	            <label for="name">Name</label>
+	            <label for="name">Name</label><form:errors path="customerName" cssStyle="margin-left:5px; color: #ff0000"/>
 	            <form:input path="customerName" id="name" class="form-control"/>
 	        </div>
 	
 	        <div class="form-group">
-	            <label for="email">Email</label>
+	            <label for="email">Email</label><form:errors path="customerEmail" cssStyle="margin-left:5px; color: #ff0000"/>
 	            <form:input path="customerEmail" id="email" class="form-control"/>
 	        </div>
 	
@@ -31,12 +32,12 @@
 	        </div>
 	
 	        <div class="form-group">
-	            <label for="username">Username</label>
+	            <label for="username">Username</label><form:errors path="username" cssStyle="margin-left:5px; color: #ff0000"/>
 	            <form:input path="Username" id="username" class="form-control"/>
 	        </div>
 	
 	        <div class="form-group">
-	            <label for="password">Password</label>
+	            <label for="password">Password</label><form:errors path="password" cssStyle="margin-left:5px; color: #ff0000"/>
 	            <form:password path="password" id="password" class="form-control"/>
 	        </div>
 	

@@ -1,8 +1,11 @@
 package com.dvk.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,8 +31,18 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value="/register",method=RequestMethod.POST)
-	public String registerCustomer(@ModelAttribute("customer") Customer customer){
-		customerService.addCustomer(customer);
-		return "registerCustomerSuccess";
+	public String registerCustomer(@Valid @ModelAttribute("customer") Customer customer,
+								   BindingResult result, Model model){
+		if(result.hasErrors()){
+			return "registerCustomer";
+		}
+		String status = customerService.addCustomer(customer);
+		if("success".equals(status)){
+			return "registerCustomerSuccess";
+		}
+		else{
+			model.addAttribute("registerErrorMsg", status);
+			return "registerCustomer";
+		}
 	}
 }

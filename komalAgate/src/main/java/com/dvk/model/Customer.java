@@ -9,6 +9,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -20,14 +22,18 @@ public class Customer implements Serializable{
 	@GeneratedValue
 	private int customerId;
 	
+	@NotEmpty(message="The customer name must not be empty.")
 	private String customerName;
 	
+	@NotEmpty(message="The customer email must not be empty.")
 	private String customerEmail;
 	
 	private String customerPhone;
 	
+	@NotEmpty(message="The customer UserName must not be empty.")
 	private String username;
 	
+	@NotEmpty(message="The customer password must not be empty.")
 	private String password;
 	
 	@OneToOne(cascade=CascadeType.ALL)

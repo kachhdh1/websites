@@ -6,7 +6,7 @@ import com.dvk.model.Customer;
 
 public interface CustomerService {
 	
-	void addCustomer (Customer customer);
+	String addCustomer (Customer customer);
 
     Customer getCustomerById (int customerId);
 

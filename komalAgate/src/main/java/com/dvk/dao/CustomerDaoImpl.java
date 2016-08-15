@@ -1,10 +1,7 @@
 package com.dvk.dao;
 
-import com.dvk.dao.CustomerDao;
-import com.dvk.model.Authorities;
-import com.dvk.model.Cart;
-import com.dvk.model.Customer;
-import com.dvk.model.Users;
+import java.util.List;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,7 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import com.dvk.model.Authorities;
+import com.dvk.model.Cart;
+import com.dvk.model.Customer;
+import com.dvk.model.Users;
 
 /**
  * Created by Le on 1/25/2016.
@@ -70,5 +70,13 @@ public class CustomerDaoImpl implements CustomerDao{
         query.setString(0, username);
 
         return (Customer) query.uniqueResult();
+    }
+    
+    public Users getUserByUserName(String userName){
+    	Session session = sessionFactory.getCurrentSession();
+        Query query = session.createQuery("from Users as user where user.username = :userName");
+    	query.setParameter("userName", userName);
+    	List<Users> users =  query.list();
+    	return users.isEmpty()?null:users.get(0);
     }
 }
